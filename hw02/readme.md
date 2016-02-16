@@ -2,4 +2,4 @@
 
 ## Model
 
-<img width="728" src="model.jpg" alt="model">
+<img width="728" src="db.jpg" alt="model">
