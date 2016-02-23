@@ -70,9 +70,10 @@ class CRUD {
     $this->query  = "SELECT ";
     $this->query .= ($data['fields']) ? implode(",",$data['fields']) : "*";
     $this->query .= " FROM {$data['table']} ";
-    $this->query .= (is_array($data['condition'])) ? "WHERE {$data['condition']} " : " ";
+    $this->query .= ($data['condition']) ? "WHERE {$data['condition']} " : " ";
     $this->query .= ($data['limit']) ? "LIMIT ".$data['limit'] : "";
 
+    // echo $this->query;
     return $this->fetch($this->query);
   }
 

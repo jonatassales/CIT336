@@ -10,8 +10,13 @@ define("PASSWORD", "root");
 //
 // Loading project's classes
 //
+
 function autoloader($class) {
-    include 'class/' . $class . '.class.php';
+    if(is_dir('class/')) {
+      include 'class/' . $class . '.class.php';
+    } else {
+      include '../class/' . $class . '.class.php';
+    }
 }
 spl_autoload_register('autoloader');
 
