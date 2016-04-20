@@ -1,16 +1,4 @@
-<?php
-include 'config/conf.php';
-
-$objUser = new User();
-
-if($_POST['insertUser']) {
-  //Insert User
-  $data['fields']['name'] = $_POST['name'];
-  $data['fields']['adress'] = $_POST['adress'];
-  $data['fields']['email'] = $_POST['email'];
-  $objUser->insertUser($data);
-}
-?>
+<?php include 'config/conf.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +13,7 @@ if($_POST['insertUser']) {
     <h3>Create User</h3>
     </div>
     <div class="row">
-      <form action="index.php" method="POST" id="user">
+      <form action="controller/users.php" method="POST" id="user">
         <input placeholder="Name" type="text" class="span4" name="name"><br>
         <input placeholder="Address" type="text" class="span5" name="adress"><br>
         <input placeholder="Email" type="text" class="span5" name="email"><br>
@@ -38,11 +26,6 @@ if($_POST['insertUser']) {
       </form>
     </div>
   </div>
-  <script type="text/javascript" src="ajax.js"></script>
-  <script type="text/javascript">
-    function sendForm() {
-      sendData(document.getElementById("user"));
-    }
-  </script>
+  <script type="text/javascript" src="assets/javascript/ajax.js"></script>
 </body>
 </html>

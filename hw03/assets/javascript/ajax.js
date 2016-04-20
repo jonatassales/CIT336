@@ -30,24 +30,55 @@ function insinfo(sendForm) {
    return dataArray.join("&");
  }
 
-function success() { location.assign("index.php?alert=success") }
+function FormSuccess() { location.assign("index.php?alert=success") }
 
-function error() { location.assign("index.php?alert=error") }
+function FormError() { location.assign("index.php?alert=error") }
 
 function sendData(form) {
   var xmlHttp = createXMLHttp();
-  xmlHttp.open('post', 'form.php', true);
+  xmlHttp.open('post', 'controller/users.php', true);
   xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xmlHttp.send(insinfo(form));
   xmlHttp.onreadystatechange = function() {
     if (xmlHttp.readyState === 4) {
       if (xmlHttp.status === 200) {
-        success.call(null, xmlHttp.responseText);
+        FormSuccess.call(null, xmlHttp.responseText);
       } else {
-        error.call(null, xmlHttp.responseText);
+        FormError.call(null, xmlHttp.responseText);
       }
     } else {
       //still processing
     }
   };
+}
+
+function sendForm() {
+  sendData(document.getElementById("user"));
+}
+
+function searchName() {
+  var name = document.getElementById('search').value;
+  var xmlHttp = createXMLHttp();
+  xmlHttp.open('post', 'controller/users.php', true);
+  xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xmlHttp.send('search=true&name='+name);
+  xmlHttp.onreadystatechange = function() {
+    if (xmlHttp.readyState === 4) {
+      if (xmlHttp.status === 200) {
+        searchSuccess.call(null, xmlHttp.responseText);
+      } else {
+        searchError.call(null, xmlHttp.responseText);
+      }
+    } else {
+      //still processing
+    }
+  };
+}
+
+function searchSuccess(response) {
+  document.getElementById('users-list').innerHTML = response;
+}
+
+function searchError() {
+
 }

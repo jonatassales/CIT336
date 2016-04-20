@@ -12,5 +12,12 @@ class User extends CRUD {
     $data['table'] = $this->table;
     return $this->create($data);
   }
+
+  function searchUserByName($name) {
+    $data['table'] = $this->table;
+    $data['condition']['name']['value'] = "'%".$name."%'";
+    $data['condition']['name']['operator'] = "LIKE";
+    return $this->read($data);
+  }
 }
 ?>

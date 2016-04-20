@@ -2,26 +2,20 @@
 include 'config/conf.php';
 
 $objUser = new User();
+// $data['limit'] = 10;
 $users = $objUser->getUser($data);
-$data['limit'] = 5;
-unset($data);
-
-if($_POST['insertUser']) {
-  //Insert User
-  $data['fields']['name'] = $_POST['name'];
-  $data['fields']['adress'] = $_POST['adress'];
-  $data['fields']['email'] = $_POST['email'];
-  $objUser->insertUser($data);
-  header("Location: index.php?alert=success");
-}
-
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
+
+  <!-- CSS -->
   <link href="assets/stylesheets/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/stylesheets/index.css" rel="stylesheet">
+
+  <!-- JS -->
   <script src="assets/javascript/bootstrap.min.js"></script>
 </head>
 <body>
@@ -36,7 +30,10 @@ if($_POST['insertUser']) {
       </div>
     <?php } ?>
     <div class="row">
-    <h3>Users</h3>
+      <h3>Users</h3>
+    </div>
+    <div class="row search-bar">
+      <input type="text" onkeyup="searchName()" id="search" class="search-query" placeholder="Search">
     </div>
     <div class="row">
       <table class="table table-striped table-bordered">
@@ -48,7 +45,7 @@ if($_POST['insertUser']) {
             <th>Address</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="users-list">
         <?php
          foreach ($users as $key => $value) {
            echo '<tr>';
@@ -67,4 +64,5 @@ if($_POST['insertUser']) {
     </div>
   </div>
 </body>
+<script type="text/javascript" src="assets/javascript/ajax.js"></script>
 </html>

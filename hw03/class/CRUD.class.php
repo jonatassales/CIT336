@@ -73,11 +73,12 @@ class CRUD {
     if(is_array($data['condition'])) {
       $this->query .= "WHERE 1";
       foreach ($data['condition'] as $key => $value) {
-        $this->query .= " AND $key = '$value'";
+        $this->query .= " AND $key {$value['operator']} {$value['value']}";
       }
     }
     $this->query .= ($data['limit']) ? "LIMIT ".$data['limit'] : "";
 
+    // echo $this->query;
     return $this->fetch($this->query);
   }
 
@@ -88,7 +89,13 @@ class CRUD {
   function delete($data) {
     $this->query  = "DELETE FROM ";
     $this->query .= $data['table'];
-    $this->query .= ($)
+    if(is_array($data['condition'])) {
+      $this->query .= " WHERE 1";
+      foreach ($data['condition'] as $key => $value) {
+        $this->query .= " AND $key {$value['operator']} {$value['value']}";
+      }
+    }
+    $this->conn->exec($this->query);
   }
 
   function fetch($query) {
