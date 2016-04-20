@@ -70,7 +70,12 @@ class CRUD {
     $this->query  = "SELECT ";
     $this->query .= ($data['fields']) ? implode(",",$data['fields']) : "*";
     $this->query .= " FROM {$data['table']} ";
-    $this->query .= (is_array($data['condition'])) ? "WHERE {$data['condition']} " : " ";
+    if(is_array($data['condition'])) {
+      $this->query .= "WHERE 1";
+      foreach ($data['condition'] as $key => $value) {
+        $this->query .= " AND $key = '$value'";
+      }
+    }
     $this->query .= ($data['limit']) ? "LIMIT ".$data['limit'] : "";
 
     return $this->fetch($this->query);
@@ -81,7 +86,9 @@ class CRUD {
   }
 
   function delete($data) {
-
+    $this->query  = "DELETE FROM ";
+    $this->query .= $data['table'];
+    $this->query .= ($)
   }
 
   function fetch($query) {
