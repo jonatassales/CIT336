@@ -5,7 +5,7 @@
  * parts of a query
  *
  * @author Jonatas Sales <jonatasvsales@gmail.com>
- * @copyright 2016, Jonatas Sales
+ * @copyright 2016, Neongate AI
  * @license http://opensource.org/licenses/MIT
  * @link http://github.com/jonatassales
  */
